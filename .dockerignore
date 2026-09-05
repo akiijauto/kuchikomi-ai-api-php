@@ -1,0 +1,26 @@
+# ビルドに要らないものを送らない（コンテキスト削減＋秘密情報をイメージに入れない）
+.env
+.env.*
+!.env.example
+
+.git
+.github
+
+# 依存関係はビルドステージで composer install しなおすため、
+# ホスト側の vendor/ はコンテキストに含めない（転送量の削減。composer.lock は
+# ビルドステージが読むので除外しない）
+vendor
+
+tests
+phpunit.xml
+db
+
+Dockerfile
+.dockerignore
+README.md
+
+# OS・エディタ
+.DS_Store
+Thumbs.db
+.idea
+.vscode

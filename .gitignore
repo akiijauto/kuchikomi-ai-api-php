@@ -1,0 +1,17 @@
+# 依存の実体は追跡しない。composer.lock があれば同じ構成を再現できる。
+# lock のほうは追跡する（アプリなので、誰が入れても同じ版が入るようにする）。
+vendor/
+
+# 秘密情報は絶対にコミットしない
+.env
+.env.*
+!.env.example
+
+# エディタ・OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# PHPUnitの実行結果キャッシュ（成果物）
+.phpunit.result.cache
