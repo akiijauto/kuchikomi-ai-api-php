@@ -99,8 +99,8 @@ final class ClaudeGenerator implements Generator
             throw new RuntimeException('生成結果を読み取れませんでした');
         }
 
-        if (count($parsed['replies']) === 0) {
-            throw new RuntimeException('返信案が1件も返りませんでした');
+        if (count($parsed['replies']) !== 3) {
+            throw new RuntimeException('返信案が3件揃っていません');
         }
 
         $replies = [];
@@ -110,6 +110,9 @@ final class ClaudeGenerator implements Generator
                 || !isset($item['label'], $item['text'])
                 || !is_string($item['label'])
                 || !is_string($item['text'])
+                || preg_match('/\A[\s\p{Z}]*\z/u', $item['label']) === 1
+                || preg_match('/\A[\s\p{Z}]*\z/u', $item['text']) === 1
+                || mb_strlen($item['label'], 'UTF-8') > 15
             ) {
                 throw new RuntimeException('生成結果を読み取れませんでした');
             }
